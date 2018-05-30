@@ -7,7 +7,7 @@ Ethereum Smart Contract that facilitates negotiating a price between a buyer and
 - Clone this repo to your local machine
 
 # Instructions For Use
-Open the Ganache client then run the following commands from the command line within the 'Eth_price_negotiation' directory of your cloned copy:
+Open the Ganache client then run the following commands from the command line within the 'price_negotiation' directory of your cloned copy:
 - truffle compile
 - Start Ganache
 - truffle migrate --reset
