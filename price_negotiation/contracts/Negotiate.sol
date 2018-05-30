@@ -11,7 +11,7 @@ pragma solidity ^0.4.18;
     *  - Both parties must accept the current price before any currency is exchanged
     *  - Either party can cancel the negotiation and only gas cost is lost
     *  - The seller pays all gas costs
-    *  - The seller can canel the offer at any time
+    *  - The seller can cancel the offer at any time
     *
     ** Flow:
     *  1. Seller starts sale by migrating the contract to the blockchain.
@@ -58,7 +58,7 @@ contract Negotiate {
     /**
     * The contract constructor
     */
-    function Negotiate() public {
+    constructor() public {
         seller = msg.sender;
 	}
 
@@ -69,7 +69,7 @@ contract Negotiate {
         require(buyer == address(0) && seller != address(0));
 
         buyer = msg.sender;
-        NegotiationStartEvent(seller, buyer);
+        emit NegotiationStartEvent(seller, buyer);
     }
 
     /**
@@ -82,7 +82,7 @@ contract Negotiate {
         sellerAccepted = false;
         buyerAccepted = false;
         currentPrice = price;
-        NewPriceEvent(currentPrice, msg.sender);
+        emit NewPriceEvent(currentPrice, msg.sender);
     }
 
     /**
@@ -101,7 +101,7 @@ contract Negotiate {
 
         if(sellerAccepted && buyerAccepted) {
             negotiationCompleted = true;
-            NegotiationOverEvent(currentPrice);
+            emit NegotiationOverEvent(currentPrice);
         }
     }
 
@@ -116,7 +116,7 @@ contract Negotiate {
         funds = msg.value;
         tradeCompleted = true;
         /* Future improvement: add some mechanism for transferring access to traded object to buyer here */
-        TradeOverEvent(funds);
+        emit TradeOverEvent(funds);
     }
 
 
